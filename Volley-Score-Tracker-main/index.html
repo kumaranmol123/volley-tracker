@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volleyball Score Tracker</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/lucide.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Setup Section -->
+        <div id="setupSection" class="section">
+            <div class="header">
+                <h1 class="title">Volleyball Score Tracker</h1>
+                <p class="subtitle">Professional game tracking and statistics</p>
+            </div>
+
+            <div class="setup-card">
+                <div class="card-header">
+                    <h2 class="card-title">Team Setup</h2>
+                </div>
+                <div class="card-content">
+                    <div class="setup-form">
+                        <div class="input-group">
+                            <label class="label">Team A Name</label>
+                            <input type="text" id="teamAName" class="input" placeholder="Enter Team A name" value="Team Alpha">
+                        </div>
+                        <div class="input-group">
+                            <label class="label">Team B Name</label>
+                            <input type="text" id="teamBName" class="input" placeholder="Enter Team B name" value="Team Beta">
+                        </div>
+                    </div>
+                    <button class="btn btn-primary btn-large" onclick="startGame()">
+                        <i data-lucide="play"></i>
+                        Start Game
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Section -->
+        <div id="gameSection" class="section hidden">
+            <div class="game-header">
+                <h1 class="title">Volleyball Score Tracker</h1>
+                <p class="subtitle">Live Game in Progress</p>
+            </div>
+
+            <!-- Winner Announcement -->
+            <div id="winnerSection" class="winner-card hidden">
+                <div class="card-content winner-content">
+                    <i data-lucide="trophy" class="winner-icon"></i>
+                    <h2 id="winnerText" class="winner-title">Team Wins!</h2>
+                    <p id="finalScoreText" class="winner-score"></p>
+                    <button class="btn btn-outline" onclick="newGame()">
+                        <i data-lucide="play"></i>
+                        Play Again
+                    </button>
+                </div>
+            </div>
+
+            <!-- Game Board -->
+            <div class="game-board">
+                <!-- Team A -->
+                <div class="team-card team-a">
+                    <div class="team-header">
+                        <h3 id="teamADisplay" class="team-name">Team A</h3>
+                        <div id="teamAScore" class="team-score">0</div>
+                    </div>
+                    <div class="team-actions">
+                        <button class="btn btn-outline btn-small" onclick="addPoint('A', 'Spike')">
+                            Spike
+                        </button>
+                        <button class="btn btn-outline btn-small" onclick="addPoint('A', 'Block')">
+                            Block
+                        </button>
+                        <button class="btn btn-outline btn-small" onclick="addPoint('A', 'Serve')">
+                            Serve
+                        </button>
+                        <button class="btn btn-outline btn-small" onclick="addPoint('A', 'Attack')">
+                            Attack
+                        </button>
+                    </div>
+                </div>
+
+                <!-- VS Section -->
+                <div class="vs-section">
+                    <div class="vs-content">
+                        <div class="vs-text">VS</div>
+                        <div class="vs-info">
+                            <i data-lucide="target"></i>
+                            <span>First to 25 wins</span>
+                        </div>
+                        <div class="current-score">
+                            <div class="score-label">Current Score</div>
+                            <div id="currentScore" class="score-display">0 - 0</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Team B -->
+                <div class="team-card team-b">
+                    <div class="team-header">
+                        <h3 id="teamBDisplay" class="team-name">Team B</h3>
+                        <div id="teamBScore" class="team-score">0</div>
+                    </div>
+                    <div class="team-actions">
+                        <button class="btn btn-outline btn-small" onclick="addPoint('B', 'Spike')">
+                            Spike
+                        </button>
+                        <button class="btn btn-outline btn-small" onclick="addPoint('B', 'Block')">
+                            Block
+                        </button>
+                        <button class="btn btn-outline btn-small" onclick="addPoint('B', 'Serve')">
+                            Serve
+                        </button>
+                        <button class="btn btn-outline btn-small" onclick="addPoint('B', 'Attack')">
+                            Attack
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Game Controls -->
+            <div class="game-controls">
+                <button class="btn btn-destructive" onclick="resetGame()">
+                    <i data-lucide="rotate-ccw"></i>
+                    Reset Game
+                </button>
+                <button class="btn btn-outline" onclick="undoLastAction()">
+                    <i data-lucide="undo"></i>
+                    Undo Last
+                </button>
+                <button class="btn btn-default" onclick="newGame()">
+                    <i data-lucide="plus"></i>
+                    New Game
+                </button>
+            </div>
+
+            <!-- Statistics and Log -->
+            <div class="stats-log-container">
+                <!-- Team Statistics -->
+                <div class="stats-card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <i data-lucide="bar-chart-3"></i>
+                            Team Statistics
+                        </h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="stats-grid">
+                            <div class="team-stats">
+                                <h4 id="teamAStatsName" class="stats-team-name">Team A</h4>
+                                <div class="stats-list">
+                                    <div class="stat-item">
+                                        <span class="stat-label">Spike:</span>
+                                        <span id="teamASpike" class="stat-value">0</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">Block:</span>
+                                        <span id="teamABlock" class="stat-value">0</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">Serve:</span>
+                                        <span id="teamAServe" class="stat-value">0</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">Attack:</span>
+                                        <span id="teamAAttack" class="stat-value">0</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="team-stats">
+                                <h4 id="teamBStatsName" class="stats-team-name">Team B</h4>
+                                <div class="stats-list">
+                                    <div class="stat-item">
+                                        <span class="stat-label">Spike:</span>
+                                        <span id="teamBSpike" class="stat-value">0</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">Block:</span>
+                                        <span id="teamBBlock" class="stat-value">0</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">Serve:</span>
+                                        <span id="teamBServe" class="stat-value">0</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">Attack:</span>
+                                        <span id="teamBAttack" class="stat-value">0</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Log -->
+                <div class="log-card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <i data-lucide="clock"></i>
+                            Game Action Log
+                        </h3>
+                    </div>
+                    <div class="card-content">
+                        <div id="actionLog" class="action-log">
+                            <p class="no-actions">Game actions will appear here...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Game Info Cards -->
+            <div class="info-cards">
+                <div class="info-card">
+                    <div class="info-content">
+                        <i data-lucide="clock" class="info-icon"></i>
+                        <h4 class="info-title">Game Duration</h4>
+                        <p id="gameDuration" class="info-text">0 minutes</p>
+                    </div>
+                </div>
+                <div class="info-card">
+                    <div class="info-content">
+                        <i data-lucide="bar-chart-3" class="info-icon"></i>
+                        <h4 class="info-title">Total Points</h4>
+                        <p id="totalPoints" class="info-text">0 points scored</p>
+                    </div>
+                </div>
+                <div class="info-card">
+                    <div class="info-content">
+                        <i data-lucide="trophy" class="info-icon"></i>
+                        <h4 class="info-title">Leading Team</h4>
+                        <p id="leadingTeam" class="info-text">Tied</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

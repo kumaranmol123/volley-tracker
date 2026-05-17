@@ -1,0 +1,581 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", sans-serif;
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  min-height: 100vh;
+  color: #334155;
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+/* Utility Classes */
+.hidden {
+  display: none;
+}
+
+.section {
+  transition: all 0.3s ease;
+}
+
+/* Typography */
+.title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.subtitle {
+  color: #64748b;
+  text-align: center;
+  font-size: 1.1rem;
+}
+
+/* Header */
+.header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.game-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.game-header .title {
+  font-size: 2rem;
+}
+
+/* Cards */
+.setup-card,
+.stats-card,
+.log-card,
+.info-card,
+.team-card,
+.vs-section,
+.winner-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  border: 1px solid #e2e8f0;
+}
+
+.setup-card {
+  max-width: 32rem;
+  margin: 0 auto;
+}
+
+.card-header {
+  padding: 1.5rem 1.5rem 0 1.5rem;
+}
+
+.card-content {
+  padding: 1.5rem;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1e293b;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+/* Setup Form */
+.setup-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #374151;
+}
+
+.input {
+  padding: 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: all 0.2s;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 1px solid transparent;
+  text-decoration: none;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background-color: #3b82f6;
+  color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-color: #2563eb;
+}
+
+.btn-outline {
+  background-color: white;
+  color: #374151;
+  border-color: #d1d5db;
+}
+
+.btn-outline:hover:not(:disabled) {
+  background-color: #f9fafb;
+  border-color: #9ca3af;
+}
+
+.btn-destructive {
+  background-color: #ef4444;
+  color: white;
+}
+
+.btn-destructive:hover:not(:disabled) {
+  background-color: #dc2626;
+}
+
+.btn-default {
+  background-color: #1f2937;
+  color: white;
+}
+
+.btn-default:hover:not(:disabled) {
+  background-color: #111827;
+}
+
+.btn-large {
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  width: 100%;
+}
+
+.btn-small {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+}
+
+/* Winner Card */
+.winner-card {
+  margin-bottom: 1.5rem;
+  border-color: #fbbf24;
+  background-color: #fffbeb;
+}
+
+.winner-content {
+  text-align: center;
+  padding: 2rem;
+}
+
+.winner-icon {
+  width: 3rem;
+  height: 3rem;
+  color: #d97706;
+  margin: 0 auto 1rem;
+}
+
+.winner-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #92400e;
+  margin-bottom: 0.5rem;
+}
+
+.winner-score {
+  color: #a16207;
+  margin-bottom: 1rem;
+}
+
+/* Game Board */
+.game-board {
+  display: grid;
+  grid-template-columns: 1fr 300px 1fr;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.team-card {
+  padding: 0;
+  overflow: hidden;
+}
+
+.team-a {
+  border-color: #fecaca;
+}
+
+.team-a .team-header {
+  background-color: #fef2f2;
+}
+
+.team-a .team-name {
+  color: #991b1b;
+}
+
+.team-a .team-score {
+  color: #dc2626;
+}
+
+.team-b {
+  border-color: #bfdbfe;
+}
+
+.team-b .team-header {
+  background-color: #eff6ff;
+}
+
+.team-b .team-name {
+  color: #1e40af;
+}
+
+.team-b .team-score {
+  color: #2563eb;
+}
+
+.team-header {
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.team-name {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.team-score {
+  font-size: 4rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.team-actions {
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+}
+
+/* VS Section */
+.vs-section {
+  border-color: #e2e8f0;
+}
+
+.vs-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 2rem;
+  text-align: center;
+}
+
+.vs-text {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #64748b;
+  margin-bottom: 1rem;
+}
+
+.vs-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  color: #64748b;
+}
+
+.current-score {
+  text-align: center;
+}
+
+.score-label {
+  font-size: 0.875rem;
+  color: #64748b;
+  margin-bottom: 0.25rem;
+}
+
+.score-display {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #374151;
+}
+
+/* Game Controls */
+.game-controls {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+/* Statistics and Log */
+.stats-log-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.team-stats {
+  space-y: 1rem;
+}
+
+.stats-team-name {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.stats-team-name:first-child {
+  color: #991b1b;
+}
+
+.stats-team-name:last-child {
+  color: #1e40af;
+}
+
+.stats-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.stat-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.stat-label {
+  font-size: 0.875rem;
+  color: #64748b;
+}
+
+.stat-value {
+  background-color: #f1f5f9;
+  padding: 0.25rem 0.75rem;
+  border-radius: 15px;
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+/* Action Log */
+.action-log {
+  max-height: 20rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.action-log::-webkit-scrollbar {
+  width: 6px;
+}
+
+.action-log::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 3px;
+}
+
+.action-log::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+
+.log-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem;
+  background-color: #f8fafc;
+  border-radius: 6px;
+}
+
+.log-action {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.log-team {
+  font-weight: 600;
+  color: #374151;
+}
+
+.log-time {
+  font-size: 0.75rem;
+  color: #64748b;
+}
+
+.no-actions {
+  text-align: center;
+  color: #64748b;
+  font-style: italic;
+  padding: 1.5rem;
+}
+
+/* Info Cards */
+.info-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.info-content {
+  text-align: center;
+  padding: 1.5rem;
+}
+
+.info-icon {
+  width: 2rem;
+  height: 2rem;
+  color: #64748b;
+  margin: 0 auto 0.75rem;
+}
+
+.info-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 0.5rem;
+}
+
+.info-text {
+  color: #64748b;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .game-board {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .vs-section {
+    order: -1;
+  }
+
+  .stats-log-container {
+    grid-template-columns: 1fr;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .setup-form {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .game-header .title {
+    font-size: 1.5rem;
+  }
+
+  .team-score {
+    font-size: 3rem;
+  }
+
+  .team-actions {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+
+  .info-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .game-controls {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .game-controls .btn {
+    width: 200px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0.5rem;
+  }
+
+  .card-content {
+    padding: 1rem;
+  }
+
+  .team-header {
+    padding: 1rem;
+  }
+
+  .vs-content {
+    padding: 1rem;
+  }
+
+  .vs-text {
+    font-size: 1.5rem;
+  }
+
+  .winner-title {
+    font-size: 1.25rem;
+  }
+}
